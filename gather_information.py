@@ -127,7 +127,7 @@ def main(json_path: Path, save_path: Path) -> None:
 
         f.write(f"- Number of instructions in the dataset: {len(instruction_dict)}\n")
         f.write(
-            f"- The minimum required number of instructions: {max(10, len(test_set) / 20)}\n"
+            f"- The minimum required number of instructions: {max(10, len(test_set) // 20)}\n"
         )
         for index, instr in enumerate(instruction_dict):
             f.write(f"-- {(index + 1):02d}. {instr}: {instruction_dict[instr]}\n")
