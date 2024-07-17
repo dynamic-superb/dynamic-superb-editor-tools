@@ -133,7 +133,12 @@ def main(json_path: Path, save_path: Path) -> None:
             f.write(f"-- {(index + 1):02d}. {instr}: {instruction_dict[instr]}\n")
 
         for audio_inp in audio_inputs + list(labels_duration_dict.keys()):
-            curr_duration = audio_inputs_duration_dict[audio_inp]
+            if audio_inp in audio_inputs_duration_dict:
+                curr_duration = audio_inputs_duration_dict[audio_inp]
+            elif audio_inp in labels_duration_dict:
+                curr_duration = labels_duration_dict[audio_inp]
+            else:
+                raise KeyError
             curr_sum = sum(curr_duration) / 60.0  # minutes
             curr_avg = sum(curr_duration) / len(curr_duration)  # seconds
             curr_max = max(curr_duration)  # seconds
